@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:healthcare_app/ui/auth/login/login_view.dart';
 import 'package:healthcare_app/ui/auth/signUp/signup_controller.dart';
 import 'package:healthcare_app/ui/utils/app_colors.dart';
+import 'package:healthcare_app/ui/utils/image_constants.dart';
 import 'package:healthcare_app/ui/widgets/mycustom_button.dart';
 import 'package:healthcare_app/ui/widgets/mycustom_textfield.dart';
 
@@ -43,15 +44,28 @@ class SignupView extends StatelessWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  CircleAvatar(
-                    backgroundColor: AppColors.accentColor,
-                    radius: 50.r,
-                    child: Icon(
-                      Icons.person_rounded,
-                      size: 70.sp,
-                      color: AppColors.whiteColor,
+                  Container(
+                    height: 110.h,
+                    width: 110.w,
+                    decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.white,
+                          blurRadius: 1,
+                          offset: Offset(0, 0),
+                        ),
+                      ],
+                    ),
+                    child: ClipOval(
+                      child: Image.asset(
+                        ImageConstants.authlogo,
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
+
+                  // Image.asset(ImageConstants.authlogo, height: 120.h),
                   SizedBox(height: 20.h),
                   Text(
                     "SignUp",

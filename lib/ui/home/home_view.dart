@@ -1,48 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:healthcare_app/ui/home/home_controller.dart';
+import 'package:healthcare_app/ui/home/widgets/category_widget.dart';
 import 'package:healthcare_app/ui/utils/app_colors.dart';
-import 'package:healthcare_app/ui/detaile/detaile_view.dart';
-import 'package:healthcare_app/ui/widgets/mycustom_button.dart';
+import 'package:healthcare_app/ui/widgets/category_card.dart';
+import 'package:healthcare_app/ui/widgets/custom_searchbar.dart';
+import 'package:healthcare_app/ui/widgets/rated_card.dart';
 
 class HomeView extends StatelessWidget {
   HomeView({super.key});
 
-  // Categories
-  final List<Map<String, dynamic>> categories = [
-    {"title": "Cardiology", "icon": Icons.favorite},
-    {"title": "Neurology", "icon": Icons.psychology},
-    {"title": "Dentistry", "icon": Icons.medical_services},
-    {"title": "Orthopedics", "icon": Icons.accessibility_new},
-    {"title": "Dermatology", "icon": Icons.face_retouching_natural},
-  ];
-
-  // Doctors data
-  final List<Map<String, dynamic>> doctors = [
-    {
-      "name": "Dr. Sarah Ali",
-      "category": "Cardiologist",
-      "rating": 4.8,
-      "reviews": 120,
-    },
-    {
-      "name": "Dr. Ahmed Khan",
-      "category": "Neurologist",
-      "rating": 4.5,
-      "reviews": 95,
-    },
-    {
-      "name": "Dr. Ayesha Malik",
-      "category": "Dermatologist",
-      "rating": 4.7,
-      "reviews": 110,
-    },
-    {
-      "name": "Dr. Bilal Shaikh",
-      "category": "Dentist",
-      "rating": 4.4,
-      "reviews": 80,
-    },
-  ];
+  final HomeController controller = Get.put(HomeController());
 
   @override
   Widget build(BuildContext context) {
@@ -72,16 +41,12 @@ class HomeView extends StatelessWidget {
           ),
         ],
       ),
-
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: [
-              Color(0xFFE0F7FA), // Soft light blue
-              Color(0xFFFFFFFF), // Fade to white
-            ],
+            colors: [Color(0xFFE0F7FA), Color(0xFFFFFFFF)],
           ),
         ),
         child: SafeArea(
@@ -90,21 +55,8 @@ class HomeView extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Top icons
-                // Row(
-                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //   children: [
-                //     Icon(Icons.menu, size: 28.sp, color: AppColors.accentColor),
-                //     Icon(
-                //       Icons.person,
-                //       size: 28.sp,
-                //       color: AppColors.accentColor,
-                //     ),
-                //   ],
-                // ),
                 SizedBox(height: 12.h),
 
-                // Title
                 Text(
                   "Choose Your Doctor",
                   style: TextStyle(
@@ -115,10 +67,10 @@ class HomeView extends StatelessWidget {
                 ),
                 SizedBox(height: 20.h),
 
-                // Search Box
                 const CustomSearchBar(),
                 SizedBox(height: 20.h),
 
+                // Adult/Children Toggle Buttons
                 // Category Row
                 Row(
                   children: [
@@ -130,49 +82,108 @@ class HomeView extends StatelessWidget {
                       ),
                     ),
                     const Spacer(),
-                    Text("Children", style: TextStyle(fontSize: 18.sp)),
-                    SizedBox(width: 10.w),
-                    Container(
-                      height: 25.h,
-                      width: 60.w,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30.r),
-                        color: AppColors.accentColor,
+
+                    // Children Button
+                    Obx(
+                      () => GestureDetector(
+                        onTap: () => controller.selectChildren(),
+                        child: Container(
+                          height: 35.h,
+                          width: 90.w,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(30.r),
+                            color: controller.isAdult.value
+                                ? AppColors.whiteColor
+                                : AppColors.accentColor, // selected
+                            boxShadow: [
+                              if (!controller.isAdult.value)
+                                BoxShadow(
+                                  color: AppColors.accentColor.withOpacity(0.4),
+                                  blurRadius: 6,
+                                  offset: const Offset(0, 3),
+                                ),
+                            ],
+                          ),
+                          child: Center(
+                            child: Text(
+                              "Children",
+                              style: TextStyle(
+                                color: controller.isAdult.value
+                                    ? Colors.black
+                                    : AppColors.whiteColor,
+                                fontSize: 14.sp,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ),
                       ),
-                      child: Center(
-                        child: Text(
-                          "Adult",
-                          style: TextStyle(
-                            color: AppColors.whiteColor,
-                            fontSize: 12.sp,
-                            fontWeight: FontWeight.bold,
+                    ),
+                    SizedBox(width: 12.w),
+
+                    // Adult Button
+                    Obx(
+                      () => GestureDetector(
+                        onTap: () => controller.selectAdult(),
+                        child: Container(
+                          height: 35.h,
+                          width: 90.w,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(30.r),
+                            color: controller.isAdult.value
+                                ? AppColors
+                                      .accentColor // selected
+                                : AppColors.whiteColor,
+                            boxShadow: [
+                              if (controller.isAdult.value)
+                                BoxShadow(
+                                  color: AppColors.accentColor.withOpacity(0.4),
+                                  blurRadius: 6,
+                                  offset: const Offset(0, 3),
+                                ),
+                            ],
+                          ),
+                          child: Center(
+                            child: Text(
+                              "Adult",
+                              style: TextStyle(
+                                color: controller.isAdult.value
+                                    ? AppColors.whiteColor
+                                    : Colors.black,
+                                fontSize: 14.sp,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
                           ),
                         ),
                       ),
                     ),
                   ],
                 ),
-                SizedBox(height: 10.h),
 
-                // Horizontal Scrollable Categories
-                SizedBox(
-                  height: 100.h,
-                  child: ListView.separated(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: categories.length,
-                    separatorBuilder: (_, __) => SizedBox(width: 12.w),
-                    itemBuilder: (_, index) {
-                      final category = categories[index];
-                      return CategoryCard(
-                        title: category['title']!,
-                        icon: category['icon'] as IconData,
-                      );
-                    },
+                SizedBox(height: 20.h),
+
+                // Categories
+                Obx(
+                  () => SizedBox(
+                    height: 100.h,
+                    child: ListView.separated(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: controller.activeCategories.length,
+                      separatorBuilder: (_, __) => SizedBox(width: 12.w),
+                      itemBuilder: (_, index) {
+                        final category = controller.activeCategories[index];
+                        return CategoryCard(
+                          title: category['title']!,
+                          icon: category['icon'] as IconData,
+                        );
+                      },
+                    ),
                   ),
                 ),
                 SizedBox(height: 20.h),
 
-                // Doctors Section
+                // Doctors
                 Text(
                   'Available Doctors',
                   style: TextStyle(
@@ -182,233 +193,27 @@ class HomeView extends StatelessWidget {
                 ),
                 SizedBox(height: 10.h),
 
-                // Doctors List
                 Expanded(
-                  child: ListView.separated(
-                    itemCount: doctors.length,
-                    separatorBuilder: (_, __) => SizedBox(height: 12.h),
-                    itemBuilder: (_, index) {
-                      final doctor = doctors[index];
-                      return RatedCard(
-                        doctorName: doctor['name'],
-                        category: doctor['category'],
-                        rating: doctor['rating'],
-                        reviews: doctor['reviews'],
-                      );
-                    },
+                  child: Obx(
+                    () => ListView.separated(
+                      itemCount: controller.activeDoctors.length,
+                      separatorBuilder: (_, __) => SizedBox(height: 12.h),
+                      itemBuilder: (_, index) {
+                        final doctor = controller.activeDoctors[index];
+                        return RatedCard(
+                          doctorName: doctor['name'],
+                          category: doctor['category'],
+                          rating: doctor['rating'],
+                          reviews: doctor['reviews'],
+                        );
+                      },
+                    ),
                   ),
                 ),
               ],
             ),
           ),
         ),
-      ),
-    );
-  }
-}
-
-///// Custom Search Bar
-class CustomSearchBar extends StatelessWidget {
-  const CustomSearchBar({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 10.w),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(24.r),
-        border: Border.all(color: Colors.grey.shade300, width: 1.w),
-        boxShadow: [
-          BoxShadow(color: Colors.black12, blurRadius: 4, offset: Offset(2, 2)),
-        ],
-      ),
-      child: Row(
-        children: [
-          Icon(Icons.search, size: 22.sp, color: Colors.grey[700]),
-          SizedBox(width: 8.w),
-          Expanded(
-            child: TextField(
-              decoration: InputDecoration(
-                hintText: "Search Doctor Specialty",
-                hintStyle: TextStyle(fontSize: 14.sp, color: Colors.grey),
-                border: InputBorder.none,
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-///// Category Card
-class CategoryCard extends StatelessWidget {
-  final String title;
-  final IconData icon;
-
-  const CategoryCard({super.key, required this.title, required this.icon});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 120.h,
-      width: 100.w,
-      padding: EdgeInsets.all(12.w),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16.r),
-        boxShadow: [
-          BoxShadow(color: Colors.black12, blurRadius: 6, offset: Offset(2, 2)),
-        ],
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Container(
-            height: 50.h,
-            width: 50.w,
-            decoration: BoxDecoration(
-              color: AppColors.accentColor.withOpacity(0.1),
-              shape: BoxShape.circle,
-            ),
-            child: Icon(icon, size: 28.sp, color: AppColors.accentColor),
-          ),
-          SizedBox(height: 8.h),
-          Flexible(
-            child: Text(
-              title,
-              textAlign: TextAlign.center,
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-              style: TextStyle(
-                fontSize: 13.sp,
-                fontWeight: FontWeight.w600,
-                color: Colors.black87,
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-///// Rated Card
-class RatedCard extends StatelessWidget {
-  final String doctorName;
-  final String category;
-  final double rating;
-  final int reviews;
-
-  const RatedCard({
-    super.key,
-    required this.doctorName,
-    required this.category,
-    required this.rating,
-    required this.reviews,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.symmetric(vertical: 8.h),
-      padding: EdgeInsets.all(16.w),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(20.r),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.15),
-            blurRadius: 10,
-            spreadRadius: 2,
-            offset: const Offset(0, 4),
-          ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              CircleAvatar(
-                radius: 35,
-                backgroundColor: AppColors.accentColor.withOpacity(0.1),
-                child: Icon(
-                  Icons.person,
-                  size: 40,
-                  color: AppColors.accentColor,
-                ),
-              ),
-              SizedBox(width: 16.w),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    doctorName,
-                    style: TextStyle(
-                      color: Colors.black87,
-                      fontSize: 16.sp,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  SizedBox(height: 6.h),
-                  Text(
-                    category,
-                    style: TextStyle(
-                      color: Colors.grey.shade600,
-                      fontSize: 14.sp,
-                    ),
-                  ),
-                  SizedBox(height: 8.h),
-                  Row(
-                    children: [
-                      Row(
-                        children: List.generate(
-                          5,
-                          (index) => Icon(
-                            Icons.star,
-                            color: index < rating.round()
-                                ? Colors.amber
-                                : Colors.grey.shade300,
-                            size: 18,
-                          ),
-                        ),
-                      ),
-                      SizedBox(width: 6.w),
-                      Text(
-                        "$rating ($reviews Reviews)",
-                        style: TextStyle(
-                          color: Colors.black54,
-                          fontSize: 13.sp,
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ],
-          ),
-          SizedBox(height: 14.h),
-          MycustomButton(
-            backgroundColor: AppColors.accentColor,
-            height: 40,
-            title: 'Make Appointment',
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (_) => DetaileView(
-                    doctorName: doctorName,
-                    category: category,
-                    rating: rating,
-                    reviews: reviews,
-                  ),
-                ),
-              );
-            },
-          ),
-        ],
       ),
     );
   }

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:healthcare_app/ui/auth/forgot_password/forgot_password_view.dart';
 import 'package:healthcare_app/ui/auth/login/login_controller.dart';
 import 'package:healthcare_app/ui/auth/signUp/signup_view.dart';
 import 'package:healthcare_app/ui/home/home_view.dart';
 import 'package:healthcare_app/ui/utils/app_colors.dart';
+import 'package:healthcare_app/ui/utils/image_constants.dart';
 import 'package:healthcare_app/ui/widgets/mycustom_button.dart';
 import 'package:healthcare_app/ui/widgets/mycustom_textfield.dart';
 
@@ -37,17 +39,9 @@ class LoginView extends StatelessWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.min, // content jitna ho utna hi lega
                 children: [
-                  CircleAvatar(
-                    backgroundColor: AppColors.accentColor,
-                    radius: 50.r,
-                    child: Icon(
-                      Icons.person_rounded,
-                      size: 70.sp,
-                      color: AppColors.whiteColor,
-                    ),
-                  ),
+                  Image.asset(ImageConstants.authlogo, height: 120.h),
 
-                  SizedBox(height: 20.h),
+                  SizedBox(height: 10.h),
                   Text(
                     "LogIn",
                     style: TextStyle(
@@ -109,6 +103,7 @@ class LoginView extends StatelessWidget {
                     child: TextButton(
                       onPressed: () {
                         // TODO: Forgot password logic
+                        Get.to(() => const ForgotPasswordView());
                       },
                       child: Text(
                         "Forgot Password?",

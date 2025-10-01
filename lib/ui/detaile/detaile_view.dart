@@ -147,6 +147,7 @@ class DetaileView extends StatelessWidget {
                   const SizedBox(height: 20),
 
                   // About Section
+                  // About Section
                   Text(
                     "About Doctor",
                     style: TextStyle(
@@ -156,8 +157,8 @@ class DetaileView extends StatelessWidget {
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    "Dr. has over 10 years of experience in treating patients. "
-                    "She is highly skilled and passionate about providing the best care.",
+                    "$doctorName has over 10 years of experience in treating patients. "
+                    "They are highly skilled and passionate about providing the best care to patients.",
                     style: TextStyle(
                       color: Colors.black54,
                       height: 1.5,

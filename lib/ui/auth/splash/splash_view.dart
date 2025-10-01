@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:healthcare_app/ui/auth/splash/splash_controller.dart';
-import 'package:healthcare_app/ui/utils/app_colors.dart';
+import 'package:healthcare_app/ui/utils/image_constants.dart';
 
 class SplashView extends StatelessWidget {
   SplashView({super.key});
@@ -23,77 +23,7 @@ class SplashView extends StatelessWidget {
             end: Alignment.bottomCenter,
           ),
         ),
-        child: SafeArea(
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                // Logo circle
-                Container(
-                  height: 120.h,
-                  width: 120.h,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    shape: BoxShape.circle,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black26,
-                        blurRadius: 8,
-                        offset: Offset(0, 4),
-                      ),
-                    ],
-                  ),
-                  child: Center(
-                    child: Icon(
-                      Icons.local_pharmacy,
-                      size: 60.sp,
-                      color: AppColors.accentColor,
-                    ),
-                  ),
-                ),
-
-                SizedBox(height: 25.h),
-
-                // App Name
-                Text(
-                  "Ferozi Pharmacy",
-                  style: TextStyle(
-                    fontSize: 28.sp,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                    letterSpacing: 1.2,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-
-                SizedBox(height: 10.h),
-
-                // Tagline
-                Text(
-                  "Stay organized, stay healthy",
-                  style: TextStyle(
-                    fontSize: 16.sp,
-                    color: Colors.white70,
-                    height: 1.5,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-
-                SizedBox(height: 40.h),
-
-                // Loader
-                SizedBox(
-                  height: 40.sp,
-                  width: 40.sp,
-                  child: const CircularProgressIndicator(
-                    strokeWidth: 3,
-                    valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
+        child: Center(child: Image.asset(ImageConstants.img, width: 250.w)),
       ),
     );
   }

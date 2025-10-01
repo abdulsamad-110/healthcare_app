@@ -53,7 +53,7 @@ class CommonFunctions {
         messageColor: AppColors.whiteColor,
         duration: const Duration(seconds: 3),
         flushbarPosition: FlushbarPosition.TOP,
-        backgroundColor: AppColors.greeycolor,
+        backgroundColor: AppColors.onelightgreencolor,
         reverseAnimationCurve: Curves.easeInOut,
         positionOffset: 20,
         borderRadius: BorderRadius.circular(12.r),
