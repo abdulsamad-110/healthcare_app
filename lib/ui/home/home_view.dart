@@ -163,12 +163,13 @@ class HomeView extends StatelessWidget {
 
                 SizedBox(height: 20.h),
 
-                // Categories
+                ///// Categories
                 Obx(
                   () => SizedBox(
-                    height: 100.h,
+                    height: 120.h,
                     child: ListView.separated(
                       scrollDirection: Axis.horizontal,
+                      clipBehavior: Clip.none, // shadow cut na ho
                       itemCount: controller.activeCategories.length,
                       separatorBuilder: (_, __) => SizedBox(width: 12.w),
                       itemBuilder: (_, index) {
@@ -181,6 +182,7 @@ class HomeView extends StatelessWidget {
                     ),
                   ),
                 ),
+
                 SizedBox(height: 20.h),
 
                 // Doctors

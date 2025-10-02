@@ -68,7 +68,7 @@ class LoginView extends StatelessWidget {
                     controller: controller.emailController,
                     hintText: "example@gmail.com",
                     titleText: 'Email',
-                    isBorder: true,
+                    //isBorder: true,
                   ),
 
                   SizedBox(height: 20.h),
@@ -78,7 +78,7 @@ class LoginView extends StatelessWidget {
                   Obx(
                     () => CustomTextField(
                       controller: controller.passwordController,
-                      isBorder: true,
+                      // isBorder: true,
                       obscureText: controller.isPwdHidden.value,
                       suffixIcon: IconButton(
                         padding: EdgeInsets.zero,
@@ -115,7 +115,7 @@ class LoginView extends StatelessWidget {
                     ),
                   ),
                   // SizedBox(height: 20.h),
-                  SizedBox(height: 20.h),
+                  SizedBox(height: 18.h),
 
                   /// Login Button
                   MycustomButton(
