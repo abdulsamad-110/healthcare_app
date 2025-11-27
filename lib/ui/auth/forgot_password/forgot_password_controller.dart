@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_utils/src/get_utils/get_utils.dart';
 import 'package:healthcare_app/ui/auth/login/login_view.dart';
+
 import 'package:healthcare_app/ui/utils/common_functions.dart';
+
+import '../otp/otp_view.dart';
 
 class ForgotPasswordController extends GetxController {
   final TextEditingController emailController = TextEditingController();
@@ -22,7 +25,7 @@ class ForgotPasswordController extends GetxController {
     );
 
     /// TODO: Navigate to OTP screen if required
-    Get.to(() => LoginView());
+    Get.to(() => OtpView());
 
     clearTextFields();
   }

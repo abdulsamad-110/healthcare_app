@@ -39,11 +39,11 @@ class LoginView extends StatelessWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.min, // content jitna ho utna hi lega
                 children: [
-                  Image.asset(ImageConstants.authlogo, height: 120.h),
+                  Image.asset(ImageConstants.authlogo, height: 100.h),
 
                   SizedBox(height: 10.h),
                   Text(
-                    "LogIn",
+                    "Login",
                     style: TextStyle(
                       fontSize: 25.sp,
                       fontWeight: FontWeight.bold,
@@ -95,7 +95,7 @@ class LoginView extends StatelessWidget {
                       titleText: "Password",
                     ),
                   ),
-                  SizedBox(height: 10.h),
+                  SizedBox(height: 6.h),
 
                   /// Forgot Password
                   Align(
@@ -115,12 +115,12 @@ class LoginView extends StatelessWidget {
                     ),
                   ),
                   // SizedBox(height: 20.h),
-                  SizedBox(height: 18.h),
+                  SizedBox(height: 16.h),
 
                   /// Login Button
                   MycustomButton(
                     backgroundColor: AppColors.accentColor,
-                    height: 42.h,
+                    height: 48.h,
                     width: 315.w,
                     title: "Login",
                     onPressed: controller.login,

@@ -52,11 +52,11 @@ class DetaileView extends StatelessWidget {
                   SizedBox(height: 20.h),
                   // Doctor avatar
                   CircleAvatar(
-                    radius: 60,
+                    radius: 50,
                     backgroundColor: Colors.white,
                     child: Icon(
                       Icons.person,
-                      size: 90,
+                      size: 80,
                       color: AppColors.accentColor,
                     ),
                   ),
@@ -71,7 +71,11 @@ class DetaileView extends StatelessWidget {
             left: 16,
             child: GestureDetector(
               onTap: () => Navigator.pop(context),
-              child: Icon(Icons.arrow_back, color: Colors.white, size: 28),
+              child: Icon(
+                Icons.arrow_back,
+                color: AppColors.blackColor,
+                size: 25,
+              ),
             ),
           ),
 

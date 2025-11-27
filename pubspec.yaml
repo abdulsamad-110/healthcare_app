@@ -42,7 +42,7 @@ dependencies:
   another_flushbar:
   shared_preferences:
   carousel_slider:
-
+  pinput: ^5.0.0
 dev_dependencies:
   flutter_test:
     sdk: flutter

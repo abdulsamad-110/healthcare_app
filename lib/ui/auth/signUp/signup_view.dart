@@ -64,10 +64,10 @@ class SignupView extends StatelessWidget {
                   //     ),
                   //   ),
                   // ),
-                  Image.asset(ImageConstants.authlogo, height: 120.h),
+                  Image.asset(ImageConstants.authlogo, height: 100.h),
                   SizedBox(height: 20.h),
                   Text(
-                    "SignUp",
+                    "Sign Up",
                     style: TextStyle(
                       fontSize: 25.sp,
                       fontWeight: FontWeight.bold,
@@ -146,7 +146,7 @@ class SignupView extends StatelessWidget {
                   /// Submit Button
                   MycustomButton(
                     backgroundColor: AppColors.accentColor,
-                    height: 42.h,
+                    height: 48.h,
                     width: 315.w,
                     title: "Submit",
                     onPressed: controller.signUp,

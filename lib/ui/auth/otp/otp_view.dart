@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:healthcare_app/ui/auth/forgot_password/forgot_password_controller.dart';
+import 'package:healthcare_app/ui/auth/otp/otp_controller.dart';
 import 'package:healthcare_app/ui/utils/app_colors.dart';
 import 'package:healthcare_app/ui/utils/image_constants.dart';
 import 'package:healthcare_app/ui/widgets/mycustom_button.dart';
 import 'package:healthcare_app/ui/widgets/mycustom_textfield.dart';
+import 'package:pinput/pinput.dart';
 
-class ForgotPasswordView extends StatelessWidget {
-  const ForgotPasswordView({super.key});
+class OtpView extends StatelessWidget {
+  const OtpView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final ForgotPasswordController controller = Get.put(
-      ForgotPasswordController(),
-    );
+    final controller = Get.put(OtpController());
 
     return Scaffold(
       appBar: AppBar(
@@ -68,7 +67,7 @@ class ForgotPasswordView extends StatelessWidget {
                 Image.asset(ImageConstants.authlogo, height: 100.h),
                 SizedBox(height: 20.h),
                 Text(
-                  "Find Your Account",
+                  "Email Verification",
                   style: TextStyle(
                     fontSize: 25.sp,
                     fontWeight: FontWeight.bold,
@@ -76,7 +75,7 @@ class ForgotPasswordView extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  "Enter your registered email address to receive a verification code from Ferozi Pharmacy.",
+                  "Enter the 6-digit OTP sent to your email address.",
                   style: TextStyle(
                     fontSize: 14.sp,
                     color: AppColors.blackColor,
@@ -87,11 +86,32 @@ class ForgotPasswordView extends StatelessWidget {
                 SizedBox(height: 30.h),
 
                 /// Email
-                CustomTextField(
-                  controller: controller.emailController,
-                  // isBorder: true,
-                  hintText: "example@gmail.com",
-                  titleText: "Email",
+                // CustomTextField(
+                //   controller: controller.emailController,
+                //   // isBorder: true,
+                //   hintText: "example@gmail.com",
+                //   titleText: "Email",
+                // ),
+                Pinput(
+                  length: 6,
+                  controller: controller.otpController,
+                  defaultPinTheme: PinTheme(
+                    width: 46.w,
+                    height: 52.h,
+                    textStyle: TextStyle(
+                      fontSize: 18.sp,
+                      color: AppColors.blackColor,
+                      fontWeight: FontWeight.w600,
+                    ),
+                    decoration: BoxDecoration(
+                      color: AppColors.whiteColor,
+                      // border: Border.all(
+                      //   // color: AppColors.blackColor.withOpacity(0.3),
+                      // ),
+                      borderRadius: BorderRadius.circular(8.r),
+                    ),
+                  ),
+                  onCompleted: (pin) => debugPrint('Completed: $pin'),
                 ),
                 SizedBox(height: 24.h),
 
@@ -100,9 +120,9 @@ class ForgotPasswordView extends StatelessWidget {
                   backgroundColor: AppColors.accentColor,
                   height: 48.h,
                   width: 315.w,
-                  title: "Submit",
+                  title: "Verify",
                   onPressed: () {
-                    controller.submit();
+                    controller.verifyOtp();
                   },
                 ),
               ],

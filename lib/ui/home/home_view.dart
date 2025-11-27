@@ -6,6 +6,7 @@ import 'package:healthcare_app/ui/home/widgets/category_widget.dart';
 import 'package:healthcare_app/ui/utils/app_colors.dart';
 import 'package:healthcare_app/ui/widgets/category_card.dart';
 import 'package:healthcare_app/ui/widgets/custom_searchbar.dart';
+import 'package:healthcare_app/ui/widgets/navbar.dart';
 import 'package:healthcare_app/ui/widgets/rated_card.dart';
 
 class HomeView extends StatelessWidget {
@@ -17,6 +18,7 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
+      drawer: Navbar(),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         surfaceTintColor: Colors.transparent,
@@ -30,10 +32,17 @@ class HomeView extends StatelessWidget {
             color: AppColors.accentColor,
           ),
         ),
-        leading: IconButton(
-          icon: Icon(Icons.menu, color: AppColors.accentColor, size: 28.sp),
-          onPressed: () {},
+        leading: Builder(
+          builder: (context) {
+            return IconButton(
+              icon: Icon(Icons.menu, color: AppColors.accentColor, size: 28.sp),
+              onPressed: () {
+                Scaffold.of(context).openDrawer();
+              },
+            );
+          },
         ),
+
         actions: [
           IconButton(
             icon: Icon(Icons.person, color: AppColors.accentColor, size: 28.sp),
@@ -41,6 +50,7 @@ class HomeView extends StatelessWidget {
           ),
         ],
       ),
+      // drawer: Navbar(),
       body: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
