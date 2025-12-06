@@ -29,6 +29,7 @@ class CustomTextField extends StatelessWidget {
   final BorderRadiusGeometry? borderRadius;
 
   final TextInputAction textInputAction;
+  final VoidCallback? onTap;
 
   const CustomTextField({
     Key? key,
@@ -49,6 +50,7 @@ class CustomTextField extends StatelessWidget {
     this.height,
     this.hintTextStyle,
     this.isBorder = false,
+    this.onTap,
     this.contentPadding,
     this.borderRadius,
     this.onSubmitted,

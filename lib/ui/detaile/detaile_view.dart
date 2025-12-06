@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:healthcare_app/ui/appointment/appointment_view.dart';
 import 'package:healthcare_app/ui/utils/app_colors.dart';
 import 'package:healthcare_app/ui/widgets/mycustom_button.dart';
 
@@ -173,11 +176,19 @@ class DetaileView extends StatelessWidget {
                   const Spacer(),
 
                   // Appointment button
+                  // MycustomButton(
+                  //   backgroundColor: AppColors.accentColor,
+                  //   title: "Make Appointment",
+                  //   onPressed: () {},
+                  // ),
                   MycustomButton(
                     backgroundColor: AppColors.accentColor,
                     title: "Make Appointment",
-                    onPressed: () {},
+                    onPressed: () {
+                      Get.to(() => AppointmentView(doctorName: doctorName));
+                    },
                   ),
+
                   SizedBox(height: 30.h),
                 ],
               ),
