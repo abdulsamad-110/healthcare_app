@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:healthcare_app/ui/auth/change_password/changepassword_view.dart';
 import 'package:healthcare_app/ui/auth/login/login_view.dart';
 import 'package:healthcare_app/ui/utils/common_functions.dart';
 
@@ -20,7 +21,7 @@ class OtpController extends GetxController {
     CommonFunctions.flushBarSuccessMessage(msg: "OTP Verified Successfully!");
 
     /// Navigate to Login screen
-    Get.offAll(() => const LoginView());
+    Get.offAll(() => const ChangePasswordView());
 
     otpController.clear();
   }

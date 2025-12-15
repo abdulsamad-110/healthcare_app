@@ -8,7 +8,7 @@ import 'package:healthcare_app/ui/home/home_view.dart';
 import 'package:healthcare_app/ui/utils/app_colors.dart';
 import 'package:healthcare_app/ui/utils/common_functions.dart';
 
-class LoginController extends GetxController {
+class ChangePasswordController extends GetxController {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
