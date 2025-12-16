@@ -8,7 +8,7 @@ import 'package:healthcare_app/ui/home/home_view.dart';
 import 'package:healthcare_app/ui/utils/app_colors.dart';
 import 'package:healthcare_app/ui/utils/common_functions.dart';
 
-class ChangePasswordController extends GetxController {
+class LoginController extends GetxController {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
@@ -53,6 +53,8 @@ class ChangePasswordController extends GetxController {
       return 'Enter a valid email address.';
     } else if (passwordController.text.trim().isEmpty) {
       return 'Password is required.';
+    } else if (passwordController.text.trim().length < 6) {
+      return 'Password must be at least 6 characters.';
     }
     return null;
   }

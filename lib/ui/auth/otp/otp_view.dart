@@ -13,7 +13,7 @@ class OtpView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(OtpController());
+    final OtpController controller = Get.put(OtpController());
 
     return Scaffold(
       appBar: AppBar(

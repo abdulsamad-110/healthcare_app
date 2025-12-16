@@ -4,45 +4,67 @@ import 'package:healthcare_app/ui/auth/login/login_view.dart';
 import 'package:healthcare_app/ui/utils/common_functions.dart';
 
 class ChangePasswordController extends GetxController {
+  /// Controllers
   final TextEditingController newPasswordController = TextEditingController();
   final TextEditingController confirmPasswordController =
       TextEditingController();
 
-  // Correct RxBools
+  /// Visibility
   RxBool isPasswordHidden = true.obs;
   RxBool isConfirmPasswordHidden = true.obs;
 
-  // Toggle new password visibility
-  void togglePassword() => isPasswordHidden.value = !isPasswordHidden.value;
+  void togglePassword() {
+    isPasswordHidden.value = !isPasswordHidden.value;
+  }
 
-  // Toggle confirm password visibility
-  void toggleConfirmPassword() =>
-      isConfirmPasswordHidden.value = !isConfirmPasswordHidden.value;
+  void toggleConfirmPassword() {
+    isConfirmPasswordHidden.value = !isConfirmPasswordHidden.value;
+  }
 
-  // Submit password
+  /// Submit Password
   void submitPassword() {
-    String newPwd = newPasswordController.text.trim();
-    String confirmPwd = confirmPasswordController.text.trim();
+    String? error = validatePassword();
 
-    if (newPwd.isEmpty || confirmPwd.isEmpty) {
-      CommonFunctions.flushBarErrorMessage(msg: "All fields are required");
+    /// Error case
+    if (error != null) {
+      CommonFunctions.flushBarErrorMessage(msg: error);
       return;
     }
 
-    if (newPwd != confirmPwd) {
-      CommonFunctions.flushBarErrorMessage(msg: "Passwords do not match");
-      return;
-    }
-
+    /// Success case
     CommonFunctions.flushBarSuccessMessage(
-      msg: "Password changed successfully",
+      msg: "Password changed successfully!",
     );
 
-    // Clear fields
+    /// Navigate to Login
+    Get.offAll(() => const LoginView());
+
+    /// Clear fields
     newPasswordController.clear();
     confirmPasswordController.clear();
+  }
 
-    // Navigate to login
-    Get.offAll(() => const LoginView());
+  /// Validation logic (same style as OTP)
+  String? validatePassword() {
+    final newPass = newPasswordController.text.trim();
+    final confirmPass = confirmPasswordController.text.trim();
+
+    if (newPass.isEmpty) {
+      return "Please enter new password.";
+    } else if (newPass.length < 6) {
+      return "Password must be at least 6 characters.";
+    } else if (confirmPass.isEmpty) {
+      return "Please confirm your password.";
+    } else if (newPass != confirmPass) {
+      return "Passwords do not match.";
+    }
+    return null;
+  }
+
+  @override
+  void onClose() {
+    newPasswordController.dispose();
+    confirmPasswordController.dispose();
+    super.onClose();
   }
 }

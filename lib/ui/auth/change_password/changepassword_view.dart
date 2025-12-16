@@ -8,14 +8,14 @@ import 'package:healthcare_app/ui/widgets/mycustom_button.dart';
 import 'package:healthcare_app/ui/widgets/mycustom_textfield.dart';
 
 class ChangePasswordView extends StatelessWidget {
-  const ChangePasswordView({super.key});
+  ChangePasswordView({super.key});
+
+  final ChangePasswordController controller = Get.put(
+    ChangePasswordController(),
+  );
 
   @override
   Widget build(BuildContext context) {
-    final ChangePasswordController controller = Get.put(
-      ChangePasswordController(),
-    );
-
     return Scaffold(
       body: Container(
         width: double.infinity,
@@ -34,11 +34,9 @@ class ChangePasswordView extends StatelessWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  // Logo
                   Image.asset(ImageConstants.authlogo, height: 100.h),
                   SizedBox(height: 15.h),
 
-                  // Title
                   Text(
                     "Change Password",
                     style: TextStyle(
@@ -47,20 +45,10 @@ class ChangePasswordView extends StatelessWidget {
                       color: AppColors.blackColor,
                     ),
                   ),
-                  SizedBox(height: 5.h),
 
-                  // Subtitle
-                  Text(
-                    "Create a new password for your account",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 14.sp,
-                      color: AppColors.blackColor,
-                    ),
-                  ),
                   SizedBox(height: 30.h),
 
-                  // New Password
+                  /// New Password
                   Obx(
                     () => CustomTextField(
                       controller: controller.newPasswordController,
@@ -77,9 +65,10 @@ class ChangePasswordView extends StatelessWidget {
                       ),
                     ),
                   ),
+
                   SizedBox(height: 20.h),
 
-                  // Confirm Password
+                  /// Confirm Password
                   Obx(
                     () => CustomTextField(
                       controller: controller.confirmPasswordController,
@@ -96,9 +85,10 @@ class ChangePasswordView extends StatelessWidget {
                       ),
                     ),
                   ),
+
                   SizedBox(height: 30.h),
 
-                  // Submit Button
+                  /// Submit Button
                   MycustomButton(
                     title: "Change Password",
                     height: 48.h,

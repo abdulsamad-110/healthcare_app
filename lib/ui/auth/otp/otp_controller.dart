@@ -21,7 +21,7 @@ class OtpController extends GetxController {
     CommonFunctions.flushBarSuccessMessage(msg: "OTP Verified Successfully!");
 
     /// Navigate to Login screen
-    Get.offAll(() => const ChangePasswordView());
+    Get.offAll(() => ChangePasswordView());
 
     otpController.clear();
   }
